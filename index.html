@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nepal Herbal Knowledge</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .login-body {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: var(--font-body);
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(22, 163, 74, 0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+
+        .login-card h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .login-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper-login {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper-login i {
+            position: absolute;
+            left: 16px;
+            color: #9ca3af;
+            font-size: 1.2rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .guest-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .guest-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Loading Spinner */
+        .login-spinner {
+            display: none;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-msg {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="login-body">
+
+    <div class="login-card">
+        <div class="login-logo">
+            <i class='bx bxs-leaf'></i>
+        </div>
+        <h2 id="auth-title">Welcome Back</h2>
+        <p id="auth-subtitle">Login to your herbal knowledge account.</p>
+
+        <form id="login-form">
+            <div class="error-msg" id="error-msg">Invalid credentials.</div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper-login">
+                    <i class='bx bx-envelope'></i>
+                    <input type="email" id="email" class="login-input" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper-login">
+                    <i class='bx bx-lock-alt'></i>
+                    <input type="password" id="password" class="login-input" placeholder="Enter your password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="login-btn">
+                <span id="btn-text">Sign In</span>
+                <div class="login-spinner" id="login-spinner"></div>
+            </button>
+        </form>
+
+        <div style="margin-top: 16px;">
+            <a href="#" id="toggle-auth" class="guest-link" style="margin-top: 0; color: var(--primary-color);">Don't
+                have an account? Sign up</a>
+        </div>
+        <a href="app.html" class="guest-link">Continue as Guest <i class='bx bx-right-arrow-alt'></i></a>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const btnText = document.getElementById('btn-text');
+        const loginSpinner = document.getElementById('login-spinner');
+        const errorMsg = document.getElementById('error-msg');
+
+        // Humanize Firebase Errors
+        const getFriendlyErrorMessage = (error) => {
+            const code = error.code || '';
+            const msg = error.message || '';
+
+            if (code === 'auth/invalid-login-credentials' || msg.includes('INVALID_LOGIN_CREDENTIALS') || code === 'auth/user-not-found' || code === 'auth/wrong-password') {
+                return "Invalid email or password.";
+            } else if (code === 'auth/email-already-in-use') {
+                return "This email is already registered.";
+            } else if (code === 'auth/invalid-email') {
+                return "Please enter a valid email address.";
+            } else if (code === 'auth/too-many-requests') {
+                return "Too many attempts. Please try again later.";
+            } else if (code === 'auth/network-request-failed') {
+                return "Network error. Please check your connection.";
+            }
+            return "An unexpected error occurred. Please try again.";
+        };
+
+        // Auth Toggle Elements
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const toggleAuthBtn = document.getElementById('toggle-auth');
+        let isSignUp = false;
+
+        toggleAuthBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                authTitle.textContent = "Create Account";
+                authSubtitle.textContent = "Sign up to start learning.";
+                btnText.textContent = "Sign Up";
+                toggleAuthBtn.textContent = "Already have an account? Sign In";
+            } else {
+                authTitle.textContent = "Welcome Back";
+                authSubtitle.textContent = "Login to your herbal knowledge account.";
+                btnText.textContent = "Sign In";
+                toggleAuthBtn.textContent = "Don't have an account? Sign up";
+            }
+            errorMsg.style.display = 'none';
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) return;
+
+            if (isSignUp && password.length < 6) {
+                errorMsg.textContent = "Password should be at least 6 characters.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // UI Loading state
+            btnText.style.display = 'none';
+            loginSpinner.style.display = 'block';
+            errorMsg.style.display = 'none';
+
+            if (typeof firebase !== 'undefined' && firebase.apps.length > 0) {
+                if (isSignUp) {
+                    firebase.auth().createUserWithEmailAndPassword(email, password)
+                        .then((userCredential) => {
+                            window.location.href = 'app.html';
+                        })
+                        .catch((error) => {
+                            btnText.style.display = 'block';
+                            loginSpinner.style.display = 'none';
+                            errorMsg.textContent = getFriendlyErrorMessage(error);
+                            errorMsg.style.display = 'block';
+                        });
+                } else {
+                    firebase.auth().signInWithEmailAndPassword(email, password)
+                        .then((userCredential) => {
+                            window.location.href = 'app.html';
+                        })
+                        .catch((error) => {
+                            btnText.style.display = 'block';
+                            loginSpinner.style.display = 'none';
+                            errorMsg.textContent = getFriendlyErrorMessage(error);
+                            errorMsg.style.display = 'block';
+                        });
+                }
+            } else {
+                setTimeout(() => {
+                    window.location.href = 'app.html';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>
