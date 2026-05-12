@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // You will need to put your Gemini API Key here
     const GEMINI_API_KEY = "AIzaSyAmcZIAJXPTjoD7oeFEdhmJJ5cI_d_4W3M";
 
     const form = document.getElementById('search-form');
